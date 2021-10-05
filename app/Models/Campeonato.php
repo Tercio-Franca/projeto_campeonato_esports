@@ -13,4 +13,7 @@ class Campeonato extends Model
      */
     protected $table = 'campeonatos';
 
+    public function times(){
+        return $this->belongsToMany(Time::class);
+    }
 }

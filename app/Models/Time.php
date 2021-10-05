@@ -13,4 +13,15 @@ class Time extends Model
      */
     protected $table = 'times';
 
+    public function jogo(){
+        return $this->belongsTo(Jogo::class);
+    }
+
+    public function organizacao(){
+        return $this->belongsTo(Organizacao::class);
+    }
+
+    public function campeonatos(){
+        return $this->belongsToMany(Campeonato::class);
+    }
 }

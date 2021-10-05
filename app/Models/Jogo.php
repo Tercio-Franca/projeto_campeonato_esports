@@ -13,4 +13,7 @@ class Jogo extends Model
      */
     protected $table = 'jogos';
 
+    public function times(){
+        return $this->hasMany(Time::class);
+    }
 }

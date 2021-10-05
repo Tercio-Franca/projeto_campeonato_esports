@@ -13,4 +13,7 @@ class Organizacao extends Model
      */
     protected $table = 'organizacoes';
 
+    public function times(){
+        return $this->hasMany(Time::class);
+    }
 }
