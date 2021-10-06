@@ -13,7 +13,33 @@ class Campeonato extends Model
      */
     protected $table = 'campeonatos';
 
-    public function times(){
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'pivot',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [];
+
+
+    public function timesRelationship(){
         return $this->belongsToMany(Time::class);
     }
 }

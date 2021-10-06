@@ -13,15 +13,77 @@ class Time extends Model
      */
     protected $table = 'times';
 
-    public function jogo(){
-        return $this->belongsTo(Jogo::class);
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'jogo_id',
+        'organizacao_id',
+        //'pivot',
+        'organizacaoRelationship',
+        'jogoRelationship',
+        'campeonatosRelationship',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'campeonatos',
+        'jogo',
+        'organizacao',
+    ];
+
+    /**
+     * Get the Jogo attribute.
+     *
+     * @return string
+     */
+    public function getCampeonatosAttribute() {
+        return $this->campeonatosRelationship;
     }
 
-    public function organizacao(){
-        return $this->belongsTo(Organizacao::class);
+    /**
+     * Get the Jogo attribute.
+     *
+     * @return string
+     */
+    public function getJogoAttribute() {
+        return $this->jogoRelationship->nome;
     }
 
-    public function campeonatos(){
-        return $this->belongsToMany(Campeonato::class);
+    /**
+     * Get the Organizacao attribute.
+     *
+     * @return string
+     */
+    public function getOrganizacaoAttribute() {
+        return $this->organizacaoRelationship->nome;
+    }
+
+
+    public function jogoRelationship(){
+        return $this->belongsTo(Jogo::class,'jogo_id');
+    }
+
+    public function organizacaoRelationship(){
+        return $this->belongsTo(Organizacao::class,'organizacao_id');
+    }
+
+    public function campeonatosRelationship(){
+        return $this->belongsToMany(Campeonato::class, 'campeonato_has_time', 'time_id', 'campeonato_id');
     }
 }
