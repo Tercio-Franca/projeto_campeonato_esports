@@ -64,6 +64,9 @@
         </style>
     </head>
     <body>
-        {{$jogos}}
+        campeonato:{{$campeonatos}}<br/>
+        jogo:{{$jogos}}<br/>
+        organizacao:{{$organizacoes}}<br/>
+        time:{{$times}}<br/>
     </body>
 </html>
