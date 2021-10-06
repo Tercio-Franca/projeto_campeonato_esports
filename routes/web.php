@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JogoController;
+use App\Http\Controllers\TimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +14,11 @@ use App\Http\Controllers\JogoController;
 |
 */
 
-Route::get('/', [ JogoController::class, 'show']);
+Route::get('/index', [ TimeController::class, 'index']); // 'name of function'
+
+Route::get('/create', [ TimeController::class, 'create']); // 'name of function'
+
+Route::get('/show/{id}', [ TimeController::class, 'show']); // 'name of function'
+
+Route::get('/edit/{id}', [ TimeController::class, 'edit']); // 'name of function'
+
