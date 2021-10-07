@@ -48,7 +48,7 @@ class Time extends Model
     ];
 
     /**
-     * Get the Jogo attribute.
+     * Get the Campeonatos attribute.
      *
      * @return string
      */
@@ -57,7 +57,17 @@ class Time extends Model
     }
 
     /**
-     * Get the Jogo attribute.
+     * Set the CampeonatosAttribute.
+     *
+     * @param  array  $value
+     * @return void
+     */
+    public function setCampeonatosAttribute($value) {
+        $this->campeonatoRelationship()->sync($value);
+    }
+
+    /**
+     * Get the jogo's attribute.
      *
      * @return string
      */
@@ -66,7 +76,20 @@ class Time extends Model
     }
 
     /**
-     * Get the Organizacao attribute.
+     * Set the jogo's id.
+     *
+     * @param  int  $value
+     * @return void
+     */
+    public function setJogoAttribute($value)
+    {
+        if(isset($value)){
+            $this->attributes['jogo_id'] = Jogo::where('id', $value)->first()->id;
+        }
+    }
+
+    /**
+     * Get the organização's attribute.
      *
      * @return string
      */
@@ -74,6 +97,18 @@ class Time extends Model
         return $this->organizacaoRelationship->nome;
     }
 
+    /**
+     * Set the organização's id.
+     *
+     * @param  int  $value
+     * @return void
+     */
+    public function setOrganizacaoAttribute($value)
+    {
+        if(isset($value)){
+            $this->attributes['organizacao_id'] = Organizacao::where('id', $value)->first()->id;
+        }
+    }
 
     public function jogoRelationship(){
         return $this->belongsTo(Jogo::class,'jogo_id');
