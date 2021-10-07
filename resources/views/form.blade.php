@@ -64,6 +64,41 @@
         </style>
     </head>
     <body>
-        time:{{$times}}<br/>
+        @if (isset($time))
+            <form method="PUT" action="http://127.0.0.1:8000/update/{{$time->id}}" accept-charset="UTF-8" name="form">
+        @else
+            <form method="POST" action="http://127.0.0.1:8000/store" accept-charset="UTF-8" name="form">
+        @endif
+            @csrf
+
+            <label for="nome" class="form-check-label">Nome:</label>
+            <input  placeholder="Somente Letras" name="nome" type="text" id="nome" value="{{$time->nome??null}}">
+
+            <label for="campeonato" class="form-check-label">Campeonato:</label>
+
+            <select id="campeonato" name="campeonato">
+                @foreach ( $campeonatos as $campeonato )
+                    <option value="{{$campeonato->id}}">{{$campeonato->nome}}</option>
+                @endforeach
+            </select>
+
+            <label for="jogo" class="form-check-label">Jogo:</label>
+
+            <select id="jogo" name="jogo">
+                @foreach ( $jogos as $jogo )
+                    <option value="{{$jogo->id}}">{{$jogo->nome}}</option>
+                @endforeach
+            </select>
+
+            <label for="organizacao" class="form-check-label">Organização:</label>
+
+            <select id="organizacao" name="organizacao">
+                @foreach ( $organizacoes as $organizacao )
+                    <option value="{{$organizacao->id}}">{{$organizacao->nome}}</option>
+                @endforeach
+            </select>
+
+            <input type="submit" value="Enviar">
+        </form>
     </body>
 </html>
