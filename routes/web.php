@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CampeonatoController;
 use App\Http\Controllers\TimeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,8 @@ use App\Http\Controllers\TimeController;
 Route::get('/index', [ TimeController::class, 'index']); // 'name of function'
 
 Route::get('/create', [ TimeController::class, 'create']); // 'name of function'
+
+Route::post('/store', [ TimeController::class, 'store']); // 'name of function'
 
 Route::get('/show/{id}', [ TimeController::class, 'show']); // 'name of function'
 
