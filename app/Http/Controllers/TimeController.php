@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Campeonato;
+use App\Models\Jogo;
+use App\Models\Organizacao;
 use App\Models\Time;
 
 class TimeController extends Controller
 {
+   /**
+     * Global private declarations.
+     */
+    private $campeonatos,$jogos,$organizacoes,$times;
 
     /**
      * Instantiate a new controller instance.
@@ -14,6 +21,9 @@ class TimeController extends Controller
      * @return void
      */
     public function __construct(Time $times){
+        $this->campeonatos = Campeonato::all();
+        $this->jogos = Jogo::all();
+        $this->organizacoes = Organizacao::all();
         $this->times = $times;
     }
 
@@ -35,8 +45,10 @@ class TimeController extends Controller
      */
     public function create()
     {
-        $times = $this->times->all();
-        return view('form', compact('times'));
+        $campeonatos = $this->campeonatos;
+        $jogos = $this->jogos;
+        $organizacoes = $this->organizacoes;
+        return view('form', compact('campeonatos','jogos','organizacoes'));
     }
 
     /**
@@ -47,7 +59,19 @@ class TimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Solicita que a model crie um novo registro com as informações do request -?-
+        //e atribui o valor de cada atributo do request ao registro de referência
+        $time = $this->times->create([
+            'nome' => $request->nome,
+            'jogo' => $request->jogo,
+            'organizacao' => $request->organizacao,
+        ]);
+
+        //Atualiza a model atual referenciada no controller para incluir o novo registro criado
+        $times = $this->times->all();
+
+        //retorna a view index, onde as informações que a model time extrai do banco são exibidas
+        return view('index',compact('times'));
     }
 
     /**
@@ -70,8 +94,13 @@ class TimeController extends Controller
      */
     public function edit($id)
     {
-        $times = $this->times->find($id);
-        return view('form', compact('times'));
+        $time = $this->times->find($id);
+
+        $campeonatos = $this->campeonatos;
+        $jogos = $this->jogos;
+        $organizacoes  = $this->organizacoes;
+        
+        return view('form', compact('campeonatos','jogos','organizacoes','time'));
     }
 
     /**
@@ -83,7 +112,12 @@ class TimeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $time = $this->times->find($id);
+        $time->update($request->all());
+        $campeonatos = $this->campeonatos;
+        $jogos = $this->jogos;
+        $organizacoes  = $this->organizacoes;
+        return view('index',compact('campeonatos','jogos','organizacoes','time'));
     }
 
     /**
