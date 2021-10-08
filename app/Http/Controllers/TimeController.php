@@ -66,12 +66,8 @@ class TimeController extends Controller
             'jogo' => $request->jogo,
             'organizacao' => $request->organizacao,
         ]);
-
-        //Atualiza a model atual referenciada no controller para incluir o novo registro criado
-        $times = $this->times->all();
-
         //retorna a view index, onde as informações que a model time extrai do banco são exibidas
-        return view('index',compact('times'));
+        return redirect()->route('time.index');
     }
 
     /**
@@ -82,8 +78,12 @@ class TimeController extends Controller
      */
     public function show($id)
     {
-        $times = $this->times->find($id);
-        return view('form', compact('times'));
+        $time = $this->times->find($id);
+
+        $campeonatos = $this->campeonatos;
+        $jogos = $this->jogos;
+        $organizacoes  = $this->organizacoes;
+        return view('form', compact('campeonatos','jogos','organizacoes','time'));
     }
 
     /**
@@ -99,7 +99,6 @@ class TimeController extends Controller
         $campeonatos = $this->campeonatos;
         $jogos = $this->jogos;
         $organizacoes  = $this->organizacoes;
-        
         return view('form', compact('campeonatos','jogos','organizacoes','time'));
     }
 
@@ -114,10 +113,7 @@ class TimeController extends Controller
     {
         $time = $this->times->find($id);
         $time->update($request->all());
-        $campeonatos = $this->campeonatos;
-        $jogos = $this->jogos;
-        $organizacoes  = $this->organizacoes;
-        return view('index',compact('campeonatos','jogos','organizacoes','time'));
+        return redirect()->route('time.index');
     }
 
     /**
@@ -128,6 +124,8 @@ class TimeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $time = $this->times->find($id);
+        $deleted = $time->delete();
+        return redirect()->route('time.index');
     }
 }
