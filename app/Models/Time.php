@@ -63,7 +63,7 @@ class Time extends Model
      * @return void
      */
     public function setCampeonatosAttribute($value) {
-        $this->campeonatoRelationship()->sync($value);
+        $this->campeonatosRelationship()->sync($value);
     }
 
     /**
