@@ -65,18 +65,19 @@
     </head>
     <body>
         @if (isset($time))
-            <form method="PUT" action="http://127.0.0.1:8000/update/{{$time->id}}" accept-charset="UTF-8" name="form">
+            <form method="POST" action="{{route('time.update',$time->id)}}" accept-charset="UTF-8" name="form">
+            @method('PUT')
         @else
-            <form method="POST" action="http://127.0.0.1:8000/store" accept-charset="UTF-8" name="form">
+            <form method="POST" action="{{ route('time.store') }}" accept-charset="UTF-8" name="form">
         @endif
             @csrf
 
             <label for="nome" class="form-check-label">Nome:</label>
             <input  placeholder="Somente Letras" name="nome" type="text" id="nome" value="{{$time->nome??null}}">
 
-            <label for="campeonato" class="form-check-label">Campeonato:</label>
+            <label for="campeonatos" class="form-check-label">Campeonato:</label>
 
-            <select id="campeonato" name="campeonato">
+            <select id="campeonatos" name="campeonatos">
                 @foreach ( $campeonatos as $campeonato )
                     <option value="{{$campeonato->id}}">{{$campeonato->nome}}</option>
                 @endforeach
@@ -100,5 +101,13 @@
 
             <input type="submit" value="Enviar">
         </form>
+        @if (isset($time))
+            <form method="POST" action="{{ route('time.destroy',$time->id) }}" accept-charset="UTF-8" name="delete">
+                @method('DELETE')
+                @csrf
+                <input type="submit" value="Excluir">
+            </form>
+        @endif
+
     </body>
 </html>
