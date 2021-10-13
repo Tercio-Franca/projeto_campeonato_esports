@@ -16,27 +16,19 @@
     @else
         {!! Form::open(['route' => array('time.store'), 'method' => 'POST', 'name' => 'form'])!!}
     @endif
-        
+
         {!!Form::label('nome', 'Nome:', ['class' => 'form-check-label'])!!}
         {!!Form::text('nome',   isset($time) ? $time->nome : null, ['class' => 'form-control','placeholder' => 'Somente Letras',  $form??null])!!}
 
         {!!Form::label('campeonatos', 'Campeonato:', ['class' => 'form-check-label'])!!}
         {!!Form::select('campeonatos', $campeonatos, isset($time) ? $time->campeonatos->first()->id : null, ['class' => 'form-control', $form??null])!!}
 
+        {!!Form::label('jogo', 'Jogo:', ['class' => 'form-check-label'])!!}
+        {!!Form::select('jogo', $jogos, isset($time) ?$time->jogo->id : null, ['class' => 'form-control', isset($form) ? $form : null])!!}
 
-        <label for="jogo" class="form-check-label">Jogo:</label>
-        <select id="jogo" name="jogo">
-            @foreach ( $jogos as $jogo )
-                <option value="{{$jogo->id}}">{{$jogo->nome}}</option>
-            @endforeach
-        </select>
+        {!!Form::label('organizacao', 'Organização:', ['class' => 'form-check-label'])!!}
+        {!!Form::select('organizacao', $organizacoes, isset($time) ?$time->organizacao->id : null, ['class' => 'form-control', isset($form) ? $form : null])!!}
 
-        <label for="organizacao" class="form-check-label">Organização:</label>
-        <select id="organizacao" name="organizacao">
-            @foreach ( $organizacoes as $organizacao )
-                <option value="{{$organizacao->id}}">{{$organizacao->nome}}</option>
-            @endforeach
-        </select>
         {!! Form::submit('Enviar', ['class' => 'btn btn-success', $form??null]); !!}
     {!! Form::close() !!}
     @if (isset($time))

@@ -28,8 +28,8 @@
                 @foreach ($times as $time)
                     <tr>
                         <td>{{$time->nome}}</td>
-                        <td>{{$time->organizacao}}</td>
-                        <td>{{$time->jogo}}</td>
+                        <td>{{$time->organizacao->nome}}</td>
+                        <td>{{$time->jogo->nome}}</td>
                         <td>
                             <a type="button" class="btn btn-primary" href="{{route('time.show',$time->id)}}" style="color: white">Visualizar</a>
                             <a type="button" class="btn btn-warning" href="{{route('time.edit',$time->id)}}">Editar</a>
