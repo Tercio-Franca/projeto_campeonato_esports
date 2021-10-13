@@ -16,6 +16,8 @@ use App\Http\Controllers\TimeController;
 |
 */
 
+Route::get('/test', [ TimeController::class, 'test'])->name('time.test'); // 'name of function'
+
 Route::get('/', [ TimeController::class, 'index'])->name('time.index'); // 'name of function'
 
 Route::get('/create', [ TimeController::class, 'create'])->name('time.create'); // 'name of function'

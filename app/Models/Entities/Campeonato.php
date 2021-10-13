@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jogo extends Model
+class Campeonato extends Model
 {
-    /**
+   /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'jogos';
+    protected $table = 'campeonatos';
 
     /**
      * The attributes that aren't mass assignable.
@@ -26,6 +26,7 @@ class Jogo extends Model
      * @var array
      */
     protected $hidden = [
+        'pivot',
         'created_at',
         'updated_at',
     ];
@@ -37,8 +38,8 @@ class Jogo extends Model
      */
     protected $appends = [];
 
-    
+
     public function timesRelationship(){
-        return $this->hasMany(Time::class);
+        return $this->belongsToMany(Time::class);
     }
 }

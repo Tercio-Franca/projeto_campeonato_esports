@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Campeonato;
-use App\Models\Jogo;
-use App\Models\Organizacao;
-use App\Models\Time;
+use App\Models\Entities\Campeonato;
+use App\Models\Entities\Jogo;
+use App\Models\Entities\Organizacao;
+use App\Models\Entities\Time;
+use App\Models\Converters;
+
 
 class TimeController extends Controller
 {
@@ -21,11 +23,23 @@ class TimeController extends Controller
      * @return void
      */
     public function __construct(Time $times){
-        $this->campeonatos = Campeonato::all();
-        $this->jogos = Jogo::all();
-        $this->organizacoes = Organizacao::all();
+        $this->campeonatos = Converters::convert_object_to_array(Campeonato::all(),'id','nome');
+        $this->jogos = Converters::convert_object_to_array(Jogo::all(),'id','nome');
+        $this->organizacoes = Converters::convert_object_to_array(Organizacao::all(),'id','nome');
         $this->times = $times;
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function test()
+    {
+        //$times = $this->times->all();
+        return view('test');
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -66,6 +80,7 @@ class TimeController extends Controller
             'jogo' => $request->jogo,
             'organizacao' => $request->organizacao,
         ]);
+        $time->campeonatos = $request->campeonatos;
         //retorna a view index, onde as informações que a model time extrai do banco são exibidas
         return redirect()->route('time.index');
     }
@@ -128,4 +143,5 @@ class TimeController extends Controller
         $deleted = $time->delete();
         return redirect()->route('time.index');
     }
+
 }
