@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Campeonato;
-use App\Models\Jogo;
-use App\Models\Organizacao;
-use App\Models\Time;
+use App\Models\Entities\Campeonato;
+use App\Models\Entities\Jogo;
+use App\Models\Entities\Organizacao;
+use App\Models\Entities\Time;
 use App\Models\Converters;
 
 
