@@ -12,6 +12,9 @@
   </head>
   <body>
     <div class="container-fluid">
+        <a type="button" class="btn btn-success" href="{{route('time.create')}}">Criar</a>
+    </div>
+    <div class="container-fluid">
         <table class="table">
             <thead>
               <tr>
