@@ -24,8 +24,8 @@ class TimeController extends Controller
      */
     public function __construct(Time $times){
         $this->campeonatos = Converters::convert_object_to_array(Campeonato::all(),'id','nome');
-        $this->jogos = Jogo::all();
-        $this->organizacoes = Organizacao::all();
+        $this->jogos = Converters::convert_object_to_array(Jogo::all(),'id','nome');
+        $this->organizacoes = Converters::convert_object_to_array(Organizacao::all(),'id','nome');
         $this->times = $times;
     }
 
