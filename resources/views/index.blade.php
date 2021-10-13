@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 
     <title>Hello, world!</title>
   </head>
@@ -31,7 +32,7 @@
                         <td>{{$time->organizacao->nome}}</td>
                         <td>{{$time->jogo->nome}}</td>
                         <td>
-                            <a type="button" class="btn btn-primary" href="{{route('time.show',$time->id)}}" style="color: white">Visualizar</a>
+                            <a type="button" class="btn btn-primary" href="{{route('time.show',$time->id)}}">Visualizar</a>
                             <a type="button" class="btn btn-warning" href="{{route('time.edit',$time->id)}}">Editar</a>
                         </td>
                     </tr>
