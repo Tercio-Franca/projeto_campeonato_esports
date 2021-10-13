@@ -80,6 +80,7 @@ class TimeController extends Controller
             'jogo' => $request->jogo,
             'organizacao' => $request->organizacao,
         ]);
+        $time->campeonatos = $request->campeonatos;
         //retorna a view index, onde as informações que a model time extrai do banco são exibidas
         return redirect()->route('time.index');
     }
