@@ -72,7 +72,7 @@ class Time extends Model
      * @return string
      */
     public function getJogoAttribute() {
-        return $this->jogoRelationship->nome;
+        return $this->jogoRelationship;
     }
 
     /**
@@ -94,7 +94,7 @@ class Time extends Model
      * @return string
      */
     public function getOrganizacaoAttribute() {
-        return $this->organizacaoRelationship->nome;
+        return $this->organizacaoRelationship;
     }
 
     /**
